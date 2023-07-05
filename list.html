@@ -9,8 +9,28 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="list.js"></script>
   <title>Document</title>
+  <script>
+    $(document).ready(async function(){
+      const pageno = getPageno();
+      const result = await fetch(pageno); //$.ajax함수는 얼마가걸릴지모르고 그것을 감싸는 함수도 얼마나 기다릴지모른다
+      // 따라서 감싸는 함수도 결과값을 기다려야하고 또 그것을 감싸는 함수도 async로 감싼다
+      if(result===null) {
+        alert("서버가 응답하지 않습니다")
+        location.href="index.html";
+      }
+      console.log(result);
+    })
+  </script>
 </head>
 <body>
+  <!-- 
+    1. http://localhost:5500/contacts?pageno=?
+    pageno를 가져오자 (없을 수도, 잘못된 값, 음수일수도)
+    2. pageno에 해당하는 연락처를 서버에서 ajax로 가지고 오자
+    3. 연락처 출력
+    4. pagination 계산
+    5. pagination 출력
+   -->
   <div id="page">
     <header><h1>ICIA</h1></header>
     <nav>
